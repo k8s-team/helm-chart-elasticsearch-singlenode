@@ -1,0 +1,7 @@
+persistance:
+  enabled: false
+  volumeClaim: elasticsearch-singlenode-pvc
+
+ingress:
+  enabled: false
+  host: example.com

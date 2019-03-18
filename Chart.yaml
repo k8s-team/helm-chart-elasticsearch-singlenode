@@ -1,0 +1,4 @@
+apiVersion: v1
+description: Search and analyze your data in real time
+name: elasticsearch
+version: 0.0.1

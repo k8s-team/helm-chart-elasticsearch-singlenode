@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: environment
+data:
+  cluster.name: "elasticsearch-cluster"
+  network.host: "0.0.0.0"
+  xpack.security.enabled: "false"
+  http.cors.enabled: "true"
+  http.cors.allow-origin: "*"
+  discovery.type: "single-node"
+  ES_JAVA_OPTS: "-Xms128m -Xmx512m"
+

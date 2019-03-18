@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:6.6.1
+        securityContext:
+          capabilities:
+            add:
+              - IPC_LOCK
+              - SYS_RESOURCE
+        ports:
+        - containerPort: 9200
+        envFrom:
+        - configMapRef:
+            name: environment
+
+        {{- if .Values.persistance.enabled }}
+        volumeMounts:
+        - mountPath: "/usr/share/elasticsearch/data"
+          subPath: elasticsearch
+          name: elastic-search-volume
+        {{ end}}
+
+      {{- if .Values.persistance.enabled }}
+      volumes:
+        - name: elastic-search-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistance.volumeClaim }}
+      {{ end}}
+
