@@ -28,17 +28,17 @@ spec:
         - configMapRef:
             name: environment
 
-        {{- if .Values.persistance.enabled }}
+        {{- if .Values.persistence.enabled }}
         volumeMounts:
         - mountPath: "/usr/share/elasticsearch/data"
           subPath: elasticsearch
           name: elastic-search-volume
         {{ end}}
 
-      {{- if .Values.persistance.enabled }}
+      {{- if .Values.persistence.enabled }}
       volumes:
         - name: elastic-search-volume
           persistentVolumeClaim:
-            claimName: {{ .Values.persistance.volumeClaim }}
+            claimName: {{ .Values.persistence.volumeClaim }}
       {{ end}}
 

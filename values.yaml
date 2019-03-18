@@ -1,4 +1,4 @@
-persistance:
+persistence:
   enabled: false
   volumeClaim: elasticsearch-singlenode-pvc
 
